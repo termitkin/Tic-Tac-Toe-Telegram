@@ -1,0 +1,38 @@
+{
+  "name": "tic-tac-toe-telegram",
+  "version": "0.1.0",
+  "author": "termitkin",
+  "license": "MIT",
+  "description": "Tic Tac Toe bot for Telegram",
+  "main": "app/index.ts",
+  "scripts": {
+    "start": "tsc && node dist/index.js"
+  },
+  "type": "module",
+  "keywords": [
+    "tic-tac-toe",
+    "telegram",
+    "telegram bot"
+  ],
+  "dependencies": {
+    "express": "4.18.1",
+    "mongoose": "6.3.1"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.13",
+    "@typescript-eslint/eslint-plugin": "5.21.0",
+    "@typescript-eslint/parser": "5.21.0",
+    "eslint": "8.14.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-node": "4.1.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.29.4",
+    "eslint-plugin-react-hooks": "4.5.0",
+    "prettier": "2.6.2",
+    "typescript": "4.6.4"
+  }
+}
