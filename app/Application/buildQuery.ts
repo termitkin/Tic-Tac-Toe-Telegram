@@ -1,6 +1,6 @@
 import { URLSearchParams } from 'url';
 
-const buildQuery = (chat_id, text, reply_markup): string => {
+export const buildQuery = (chat_id, text, reply_markup): string => {
   return new URLSearchParams({
     chat_id,
     text,
@@ -8,5 +8,3 @@ const buildQuery = (chat_id, text, reply_markup): string => {
     parse_mode: 'HTML',
   }).toString();
 };
-
-export { buildQuery };

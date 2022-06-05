@@ -1,9 +1,12 @@
-export type Mark = 'x' | 'o';
-export type CellState = Mark | '';
+import type { Mark } from './game.js';
+
+export type CellState = Mark | typeof EMPTY_CELL;
 export type CellIndex = number;
 export type EmptyCellsList = CellIndex[];
 export type GameField = CellState[];
 export type WinningCombination = readonly [number, number, number];
+
+export const EMPTY_CELL = '';
 
 export const winningCombinations: WinningCombination[] = [
   [0, 1, 2],
@@ -16,15 +19,27 @@ export const winningCombinations: WinningCombination[] = [
   [2, 4, 6],
 ];
 
-export const getNewField = (): GameField => ['', '', '', '', '', '', '', '', ''];
+export const getNewField = (): GameField => [
+  EMPTY_CELL,
+  EMPTY_CELL,
+  EMPTY_CELL,
+  EMPTY_CELL,
+  EMPTY_CELL,
+  EMPTY_CELL,
+  EMPTY_CELL,
+  EMPTY_CELL,
+  EMPTY_CELL,
+];
 
-export const checkCellIsEmpty = (gameField: GameField, cellIndex: CellIndex): boolean => gameField[cellIndex] === '';
+export const checkCellIsEmpty = (gameField: GameField, cellIndex: CellIndex): boolean =>
+  gameField[cellIndex] === EMPTY_CELL;
 
 export const getEmptyCellsList = (gameField: GameField): EmptyCellsList => {
+  const newGameField = gameField.slice();
   const emptyCellsList = [];
 
-  for (const cellIndex in gameField) {
-    if (checkCellIsEmpty(gameField, Number(cellIndex))) {
+  for (const cellIndex in newGameField) {
+    if (checkCellIsEmpty(newGameField, Number(cellIndex))) {
       emptyCellsList.push(cellIndex);
     }
   }

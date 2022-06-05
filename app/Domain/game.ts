@@ -1,45 +1,95 @@
-import { getNewField, getEmptyCellsList, checkCellIsEmpty } from './gameField.js';
+import { getNewField, getEmptyCellsList, checkCellIsEmpty, winningCombinations } from './gameField.js';
 import { getNewScores, addScore } from './scores.js';
 import { makeBotMove } from './bot.js';
 import { makePlayerMove } from './player.js';
-import type { GameField, Mark, CellIndex } from './gameField.js';
+import type { GameField, CellIndex } from './gameField.js';
 import type { Scores } from './scores.js';
 
-export type Message = string;
-export type Actor = 'player' | 'bot';
-export type Game = {
-  gameField: GameField;
-  scores: Scores;
-  message: Message;
-  actorMarks: ActorMarks;
-};
+export const MARK_X = 'x';
+export const MARK_O = 'o';
 
-export type ActorMarks = {
-  readonly player: 'x';
-  readonly bot: 'o';
-};
+export const PLAYER = 'player';
+export const BOT = 'bot';
+
+export const MESSAGE_PLAYER_WIN = 'You win!';
+export const MESSAGE_BOT_WIN = 'Bot win!';
+export const MESSAGE_TIE = 'Tie!';
+export const MESSAGE_EMPTY = '';
+
+export interface Game {
+  readonly gameField: GameField;
+  readonly scores: Scores;
+  readonly message: Message;
+  readonly actorMarks: ActorMarks;
+}
+
+export type Message = string;
+
+export type Mark = typeof MARK_X | typeof MARK_O;
+export type Actor = typeof PLAYER | typeof BOT;
+
+export interface ActorMarks {
+  readonly player: typeof MARK_X;
+  readonly bot: typeof MARK_O;
+}
+
+export interface WinnerData {
+  status: true | false;
+  index: CellIndex | null;
+}
 
 export const actorMarks: ActorMarks = {
-  player: 'x',
-  bot: 'o',
+  [PLAYER]: MARK_X,
+  [BOT]: MARK_O,
+};
+
+export const checkIfActorCanWin = (gameField: GameField, mark: Mark): WinnerData => {
+  const winnerData: WinnerData = {
+    status: null,
+    index: null,
+  };
+
+  for (const i in winningCombinations) {
+    if (
+      gameField[winningCombinations[i][1]] === mark &&
+      gameField[winningCombinations[i][2]] === mark &&
+      gameField[winningCombinations[i][0]] === ''
+    ) {
+      winnerData.status = true;
+      winnerData.index = winningCombinations[i][0];
+      break;
+    } else if (
+      gameField[winningCombinations[i][0]] === mark &&
+      gameField[winningCombinations[i][2]] === mark &&
+      gameField[winningCombinations[i][1]] === ''
+    ) {
+      winnerData.status = true;
+      winnerData.index = winningCombinations[i][1];
+      break;
+    } else if (
+      gameField[winningCombinations[i][0]] === mark &&
+      gameField[winningCombinations[i][1]] === mark &&
+      gameField[winningCombinations[i][2]] === ''
+    ) {
+      winnerData.status = true;
+      winnerData.index = winningCombinations[i][2];
+      break;
+    }
+  }
+
+  return winnerData;
 };
 
 export const getActorMark = (actorType: Actor): Mark => {
-  if (actorType === 'player') {
-    return actorMarks.player;
-  } else if (actorType === 'bot') {
-    return actorMarks.bot;
+  if (actorType === PLAYER) {
+    return actorMarks[PLAYER];
+  } else if (actorType === BOT) {
+    return actorMarks[BOT];
   }
 };
 
 export const checkIfWinnerExists = (gameField: GameField, actorType: Actor): boolean => {
-  let mark: Mark;
-
-  if (actorType === 'player') {
-    mark = getActorMark(actorType);
-  } else if (actorType === 'bot') {
-    mark = getActorMark(actorType);
-  }
+  const mark: Mark = getActorMark(actorType);
 
   return (
     (gameField[0] === mark && gameField[1] === mark && gameField[2] === mark) ||
@@ -53,14 +103,14 @@ export const checkIfWinnerExists = (gameField: GameField, actorType: Actor): boo
   );
 };
 
-export const newGame = (): Game => {
+export const getNewGame = (): Game => {
   const gameField = getNewField();
   const scores = getNewScores();
 
   return {
     gameField,
     scores,
-    message: '',
+    message: MESSAGE_EMPTY,
     actorMarks,
   };
 };
@@ -70,9 +120,9 @@ export const gameManager = (gameField: GameField, cellIndex: CellIndex, scores: 
 
   if (!checkCellIsEmpty(newGameField, cellIndex)) {
     return {
-      message: '',
-      scores,
       gameField: newGameField,
+      scores,
+      message: MESSAGE_EMPTY,
       actorMarks,
     };
   }
@@ -85,34 +135,34 @@ export const gameManager = (gameField: GameField, cellIndex: CellIndex, scores: 
     newGameField = makeBotMove(newGameField);
   }
 
-  if (checkIfWinnerExists(newGameField, 'player')) {
-    const newScores = addScore(scores, 'player');
+  if (checkIfWinnerExists(newGameField, PLAYER)) {
+    const newScores = addScore(scores, PLAYER);
 
     return {
-      message: 'You win!',
+      message: MESSAGE_PLAYER_WIN,
       scores: newScores,
       gameField: getNewField(),
       actorMarks,
     };
-  } else if (checkIfWinnerExists(newGameField, 'bot')) {
-    const newScores = addScore(scores, 'bot');
+  } else if (checkIfWinnerExists(newGameField, BOT)) {
+    const newScores = addScore(scores, BOT);
 
     return {
-      message: 'Bot win!',
+      message: MESSAGE_BOT_WIN,
       scores: newScores,
       gameField: getNewField(),
       actorMarks,
     };
   } else if (getEmptyCellsList(newGameField).length === 0) {
     return {
-      message: 'Tie!',
+      message: MESSAGE_TIE,
       scores,
       gameField: getNewField(),
       actorMarks,
     };
   } else {
     return {
-      message: '',
+      message: MESSAGE_EMPTY,
       scores,
       gameField: newGameField,
       actorMarks,

@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { sendMessage } from './Application/sendMessage.js';
 import { parseMessage } from './Application/parseMessage.js';
-import { gameManager, newGame } from './Domain/game.js';
+import { gameManager, getNewGame } from './Domain/game.js';
 import { PlayerModel } from './models/player.js';
 import type { PlayerDoc } from './models/player.js';
 
@@ -30,7 +30,7 @@ app.post('/', async (req: Request, res: Response) => {
   let player: PlayerDoc = await PlayerModel.findOne({ id: playerId });
 
   if (!player) {
-    const { gameField, scores } = newGame();
+    const { gameField, scores } = getNewGame();
 
     await PlayerModel.create({
       id: playerId,

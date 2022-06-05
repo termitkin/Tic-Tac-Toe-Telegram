@@ -5,7 +5,7 @@ export interface ScoresDoc {
   readonly bot: number;
 }
 
-const ScoresSchema = new mongoose.Schema<ScoresDoc>({
+export const ScoresSchema = new mongoose.Schema<ScoresDoc>({
   player: {
     type: Number,
     required: true,
@@ -15,5 +15,3 @@ const ScoresSchema = new mongoose.Schema<ScoresDoc>({
     required: true,
   },
 });
-
-export { ScoresSchema };

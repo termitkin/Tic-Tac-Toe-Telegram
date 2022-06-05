@@ -1,6 +1,10 @@
+import { BOT, PLAYER, getActorMark } from '../Domain/game.js';
 import type { GameField } from '../Domain/gameField.js';
 
-const generateGameField = (gameField: GameField): string => {
+const PLAYER_MARK = '❌';
+const BOT_MARK = '⭕';
+
+export const generateGameField = (gameField: GameField): string => {
   const reply = {
     inline_keyboard: [[], [], []],
   };
@@ -10,10 +14,10 @@ const generateGameField = (gameField: GameField): string => {
       w = 0;
     }
 
-    if (gameField[i] === 'x') {
-      reply.inline_keyboard[k][w] = { text: '❌', callback_data: 'player' };
-    } else if (gameField[i] === 'o') {
-      reply.inline_keyboard[k][w] = { text: '⭕', callback_data: 'bot' };
+    if (gameField[i] === getActorMark(PLAYER)) {
+      reply.inline_keyboard[k][w] = { text: PLAYER_MARK, callback_data: PLAYER };
+    } else if (gameField[i] === getActorMark(BOT)) {
+      reply.inline_keyboard[k][w] = { text: BOT_MARK, callback_data: BOT };
     } else {
       reply.inline_keyboard[k][w] = { text: ' ', callback_data: `${i}` };
     }
@@ -25,5 +29,3 @@ const generateGameField = (gameField: GameField): string => {
 
   return JSON.stringify(reply);
 };
-
-export { generateGameField };

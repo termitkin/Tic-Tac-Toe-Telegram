@@ -1,8 +1,7 @@
-import type { Scores } from '../Domain/scores';
+import type { Scores } from '../Domain/scores.js';
+import type { Message } from '../Domain/game.js';
 
-export type Message = string;
-
-const generateMessage = (text: Message, scores: Scores): Message => {
+export const generateMessage = (text: Message, scores: Scores): Message => {
   let message = '';
 
   if (text.length) {
@@ -13,5 +12,3 @@ const generateMessage = (text: Message, scores: Scores): Message => {
 
   return message;
 };
-
-export { generateMessage };

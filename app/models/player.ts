@@ -29,6 +29,4 @@ const PlayerSchema = new mongoose.Schema<PlayerDoc>({
   },
 });
 
-const PlayerModel = mongoose.model<PlayerDoc>('player', PlayerSchema);
-
-export { PlayerModel };
+export const PlayerModel = mongoose.model<PlayerDoc>('player', PlayerSchema);

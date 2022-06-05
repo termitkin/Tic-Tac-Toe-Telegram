@@ -4,7 +4,7 @@ import { generateGameField } from './generateGameField.js';
 import { generateMessage } from './generateMessage.js';
 import type { ChatId } from './parseMessage.js';
 
-const sendMessage = (chatId: ChatId, game): Promise<boolean> => {
+export const sendMessage = (chatId: ChatId, game): Promise<boolean> => {
   const keyboard = generateGameField(game.gameField);
   const message = generateMessage(game.message, game.scores);
   const urlQuery = buildQuery(chatId, message, keyboard);
@@ -14,5 +14,3 @@ const sendMessage = (chatId: ChatId, game): Promise<boolean> => {
     .then((res) => res.json())
     .then((data) => data.ok);
 };
-
-export { sendMessage };

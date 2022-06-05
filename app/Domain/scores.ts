@@ -1,28 +1,29 @@
+import { BOT, PLAYER } from './game.js';
 import type { Actor } from './game.js';
 
 export type Score = number;
-export type Scores = {
-  player: Score;
-  bot: Score;
-};
+export interface Scores {
+  [PLAYER]: Score;
+  [BOT]: Score;
+}
 
 export const getNewScores = (): Scores => {
   return {
-    player: 0,
-    bot: 0,
+    [PLAYER]: 0,
+    [BOT]: 0,
   };
 };
 
 export const addScore = (scores: Scores, actor: Actor): Scores => {
   const newScores: Scores = {
-    player: scores.player,
-    bot: scores.bot,
+    [PLAYER]: scores[PLAYER],
+    [BOT]: scores[BOT],
   };
 
-  if (actor === 'player') {
-    newScores.player += 1;
-  } else if (actor === 'bot') {
-    newScores.bot += 1;
+  if (actor === PLAYER) {
+    newScores[PLAYER] += 1;
+  } else if (actor === BOT) {
+    newScores[BOT] += 1;
   }
 
   return newScores;

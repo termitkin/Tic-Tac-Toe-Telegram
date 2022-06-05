@@ -22,22 +22,29 @@ export interface MessageWithKeyboard extends IncomingMessage {
 
 export type ParsedMessage = MessageWithText | MessageWithKeyboard;
 
-const parseMessage = (req: Request): ParsedMessage | null => {
+export const parseMessage = (req: Request): ParsedMessage | null => {
   const chatId = req.body?.message?.chat?.id || req.body?.callback_query?.message?.chat?.id;
   const playerId = req.body?.message?.from?.id || req.body?.callback_query?.from?.id;
   const playerName = req.body?.message?.from?.username || req.body?.callback_query?.from?.username;
   const chatMessage = req.body?.message?.text;
   const gameFieldData = req.body?.callback_query?.data;
 
-  if (!chatId) {
+  if (!(chatId && playerId && playerName)) {
+    console.log('chatId and/or playerId and/or playerName are not defined');
+    console.log('body:', req.body);
+
     return null;
   }
 
-  if (!chatMessage) {
+  if (chatMessage) {
+    return { chatId, playerId, playerName, chatMessage };
+  } else if (gameFieldData) {
     return { chatId, playerId, playerName, gameFieldData };
+  } else {
+    console.log('chatMessage and/or gameFieldData are not defined');
+    console.log('chatMessage:', chatMessage);
+    console.log('gameFieldData:', gameFieldData);
+
+    return null;
   }
-
-  return { chatId, playerId, playerName, chatMessage };
 };
-
-export { parseMessage };
