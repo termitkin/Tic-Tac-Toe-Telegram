@@ -1,5 +1,5 @@
-import { BOT, PLAYER, getActorMark } from '../Domain/game.js';
-import type { GameField } from '../Domain/gameField.js';
+import { BOT, PLAYER, getActorMark } from '../domain/game.js';
+import type { GameField } from '../domain/gameField.js';
 
 const PLAYER_MARK = '❌';
 const BOT_MARK = '⭕';

@@ -1,5 +1,5 @@
-import type { Scores } from '../Domain/scores.js';
-import type { Message } from '../Domain/game.js';
+import type { Scores } from '../domain/scores.js';
+import type { Message } from '../domain/game.js';
 
 export const generateMessage = (text: Message, scores: Scores): Message => {
   let message = '';
