@@ -1,4 +1,7 @@
-.idea
-node_modules/
 .env
+.idea
+node_modules
 dist
+.history
+.DS_Store
+.vscode
