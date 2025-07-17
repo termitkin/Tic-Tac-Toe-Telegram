@@ -36,11 +36,11 @@ export const checkCellIsEmpty = (gameField: GameField, cellIndex: CellIndex): bo
 
 export const getEmptyCellsList = (gameField: GameField): EmptyCellsList => {
   const newGameField = gameField.slice();
-  const emptyCellsList = [];
+  const emptyCellsList: EmptyCellsList = [];
 
   for (const cellIndex in newGameField) {
     if (checkCellIsEmpty(newGameField, Number(cellIndex))) {
-      emptyCellsList.push(cellIndex);
+      emptyCellsList.push(Number(cellIndex));
     }
   }
 
@@ -54,10 +54,12 @@ export const getRandomEmptyCell = (gameField: GameField): CellIndex => {
   return emptyCellsList[Math.round(Math.random() * (emptyCellsList.length - 1))];
 };
 
-export const markCell = (gameField: GameField, cellIndex: CellIndex, mark: Mark): GameField => {
+export const markCell = (gameField: GameField, cellIndex: CellIndex | null, mark: Mark): GameField => {
   const newGameField = gameField.slice();
 
-  newGameField[cellIndex] = mark;
+  if (cellIndex !== null) {
+    newGameField[cellIndex] = mark;
+  }
 
   return newGameField;
 };

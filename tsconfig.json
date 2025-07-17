@@ -1,3 +1,32 @@
+// {
+//   "compilerOptions": {
+//     "module": "ESNext",
+//     "esModuleInterop": true,
+//     "target": "ESNext",
+//     "moduleResolution": "node",
+//     "sourceMap": true,
+//     "outDir": "dist",
+//     "skipLibCheck": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "lib": ["ESNext"],
+//     "types": ["node"],
+//     "allowSyntheticDefaultImports": true,
+//     "isolatedModules": true,
+//     "noEmitOnError": true,
+//     "strict": true,
+//     "declaration": true,
+//     "declarationMap": true,
+//     "rootDir": "./app",
+//     "baseUrl": "./",
+//     "resolveJsonModule": true
+//   },
+//   "ts-node": {
+//     "esm": true
+//   },
+//   "include": ["app/**/*"],
+//   "exclude": ["node_modules", "dist"]
+// }
+
 {
   "compilerOptions": {
     "module": "ESNext",
@@ -5,8 +34,7 @@
     "target": "ESNext",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist"
-
-  },
-  "lib": ["es2015"]
+    "outDir": "dist",
+    "strict": true
+  }
 }

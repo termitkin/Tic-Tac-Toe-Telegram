@@ -1,0 +1,17 @@
+services:
+  tic-tac-toe-telegram:
+    image: termitkin/tic-tac-toe-telegram:latest
+    container_name: tic-tac-toe-telegram
+    networks:
+      - mongodb
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Moscow
+    labels:
+      - 'com.centurylinklabs.watchtower.enable=true'
+    env_file:
+      - .env
+
+networks:
+  mongodb:
+    external: true

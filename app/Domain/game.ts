@@ -34,7 +34,7 @@ export interface ActorMarks {
 }
 
 export interface WinnerData {
-  status: true | false;
+  status: true | false | null;
   index: CellIndex | null;
 }
 
@@ -83,9 +83,9 @@ export const checkIfActorCanWin = (gameField: GameField, mark: Mark): WinnerData
 export const getActorMark = (actorType: Actor): Mark => {
   if (actorType === PLAYER) {
     return actorMarks[PLAYER];
-  } else if (actorType === BOT) {
-    return actorMarks[BOT];
   }
+
+  return actorMarks[BOT];
 };
 
 export const checkIfWinnerExists = (gameField: GameField, actorType: Actor): boolean => {

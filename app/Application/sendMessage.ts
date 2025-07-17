@@ -2,9 +2,16 @@ import { buildQuery } from './buildQuery.js';
 import { buildUrl } from './buildUrl.js';
 import { generateGameField } from './generateGameField.js';
 import { generateMessage } from './generateMessage.js';
+import type { Game } from '../domain/game.js';
 import type { ChatId } from './parseMessage.js';
 
-export const sendMessage = (chatId: ChatId, game): Promise<boolean> => {
+interface TelegramApiResponse {
+  ok: boolean;
+  result?: any;
+  description?: string;
+}
+
+export const sendMessage = (chatId: ChatId, game: Game): Promise<boolean> => {
   const keyboard = generateGameField(game.gameField);
   const message = generateMessage(game.message, game.scores);
   const urlQuery = buildQuery(chatId, message, keyboard);
@@ -12,5 +19,5 @@ export const sendMessage = (chatId: ChatId, game): Promise<boolean> => {
 
   return fetch(url)
     .then((res) => res.json())
-    .then((data) => data.ok);
+    .then((data) => (data as TelegramApiResponse).ok);
 };

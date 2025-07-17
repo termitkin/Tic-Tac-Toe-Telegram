@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { getNewGame, gameManager } from '../domain/game.js';
+import { getNewGame, gameManager, actorMarks } from '../domain/game.js';
 import { PlayerDoc, PlayerModel } from '../models/player.js';
 import { parseMessage } from './parseMessage.js';
 import { sendMessage } from './sendMessage.js';
@@ -15,7 +15,7 @@ export const handleMessage = async (req: Request, res: Response) => {
 
   const { chatId, playerId, playerName } = parsedMessage;
 
-  let player: PlayerDoc = await PlayerModel.findOne({ id: playerId });
+  let player: PlayerDoc | null = await PlayerModel.findOne({ id: playerId });
   let message: string;
   let gameField: GameField;
   let scores: Scores;
@@ -51,6 +51,7 @@ export const handleMessage = async (req: Request, res: Response) => {
   }
 
   await sendMessage(chatId, {
+    actorMarks,
     message,
     gameField,
     scores,

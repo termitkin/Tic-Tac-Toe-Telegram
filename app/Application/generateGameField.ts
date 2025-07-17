@@ -4,8 +4,17 @@ import type { GameField } from '../domain/gameField.js';
 const PLAYER_MARK = '❌';
 const BOT_MARK = '⭕';
 
+interface InlineKeyboardButton {
+  text: string;
+  callback_data: string;
+}
+
+interface InlineKeyboardMarkup {
+  inline_keyboard: InlineKeyboardButton[][];
+}
+
 export const generateGameField = (gameField: GameField): string => {
-  const reply = {
+  const reply: InlineKeyboardMarkup = {
     inline_keyboard: [[], [], []],
   };
 
