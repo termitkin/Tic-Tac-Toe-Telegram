@@ -6,4 +6,5 @@
 - [x] Correct `Application` and `Domain` import path casing for case-sensitive filesystems.
 - [x] Read `MONGODB_URI` with the existing container URI as fallback and test both paths.
 - [x] Verify a real connection using the supplied MongoDB URI.
+- [x] Document the Yarn Classic-safe `yarn run check` command.
 - [x] Run `yarn install` and verify documented build command.

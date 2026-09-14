@@ -20,4 +20,5 @@ The repository has no `CLAUDE.md`. Contributors must infer the TypeScript/Yarn w
 - Affected files: new `CLAUDE.md` at the repository root, `package.json`, MongoDB
   startup configuration, its tests, and import declarations under `app/`.
 - Affected capability: developer documentation and local build validation.
-- No runtime behavior, API, database schema, or user-facing game flow changes.
+- Runtime configuration changes only in the MongoDB URI selection; the API,
+  database schema, and user-facing game flow are unchanged.

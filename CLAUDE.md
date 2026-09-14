@@ -28,8 +28,11 @@ Run the automated tests or the complete validation command with:
 
 ```bash
 yarn test
-yarn check
+yarn run check
 ```
+
+Use `yarn run check` exactly: in Yarn Classic, `yarn check` invokes Yarn's
+built-in dependency verification instead of this repository's `check` script.
 
 The compiled files are written to `dist/` and are not committed.
 

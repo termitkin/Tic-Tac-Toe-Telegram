@@ -31,6 +31,11 @@ case-sensitive filesystem.
 - **WHEN** a contributor runs `yarn build` after installing dependencies
 - **THEN** TypeScript resolves the `Application` and `Domain` imports using their on-disk casing
 
+#### Scenario: A contributor runs the complete project check
+
+- **WHEN** a contributor follows the validation instructions in `CLAUDE.md`
+- **THEN** they run `yarn run check` so Yarn Classic executes the package script rather than its built-in dependency check
+
 ### Requirement: Local MongoDB configuration
 
 The application SHALL use `MONGODB_URI` when it is set and SHALL retain the
