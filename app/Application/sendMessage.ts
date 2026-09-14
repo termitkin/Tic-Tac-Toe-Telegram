@@ -2,7 +2,7 @@ import { buildQuery } from './buildQuery.js';
 import { buildUrl } from './buildUrl.js';
 import { generateGameField } from './generateGameField.js';
 import { generateMessage } from './generateMessage.js';
-import type { Game } from '../domain/game.js';
+import type { Game } from '../Domain/game.js';
 import type { ChatId } from './parseMessage.js';
 
 interface TelegramApiResponse {

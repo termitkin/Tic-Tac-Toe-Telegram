@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { ScoresSchema } from './scores.js';
 import type { ScoresDoc } from './scores.js';
-import type { GameField } from '../domain/gameField.js';
+import type { GameField } from '../Domain/gameField.js';
 
 export interface PlayerDoc {
   readonly id: number;

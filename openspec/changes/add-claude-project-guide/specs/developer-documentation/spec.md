@@ -20,3 +20,13 @@ The repository SHALL contain a root-level `CLAUDE.md` that describes the project
 
 - **WHEN** a contributor creates a task branch and commit
 - **THEN** `CLAUDE.md` states the branch and commit-message conventions used by this repository
+
+### Requirement: Documented build is portable
+
+The application SHALL compile with the documented build command on a
+case-sensitive filesystem.
+
+#### Scenario: A contributor validates the application
+
+- **WHEN** a contributor runs `yarn build` after installing dependencies
+- **THEN** TypeScript resolves the `Application` and `Domain` imports using their on-disk casing

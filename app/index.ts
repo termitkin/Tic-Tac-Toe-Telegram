@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { handleMessage } from './application/messageController.js';
+import { handleMessage } from './Application/messageController.js';
 
 const APP_PORT = 7000;
 

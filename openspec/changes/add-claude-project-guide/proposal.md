@@ -10,9 +10,12 @@ The repository has no `CLAUDE.md`. Contributors must infer the TypeScript/Yarn w
 - Document local startup requirements for the Telegram bot, including required environment variables and use of the supplied MongoDB connection string.
 - Describe the `app/Application`, `app/Domain`, and `app/models` layout.
 - Define repository conventions for task branches and concise, imperative commits.
+- Correct import path casing so the documented TypeScript build works on
+  case-sensitive filesystems.
 
 ## Impact
 
-- Affected files: new `CLAUDE.md` at the repository root.
-- Affected capability: developer documentation.
+- Affected files: new `CLAUDE.md` at the repository root and import declarations
+  under `app/`.
+- Affected capability: developer documentation and local build validation.
 - No runtime behavior, API, database schema, or user-facing game flow changes.

@@ -1,10 +1,10 @@
 import type { Request, Response } from 'express';
-import { getNewGame, gameManager, actorMarks } from '../domain/game.js';
+import { getNewGame, gameManager, actorMarks } from '../Domain/game.js';
 import { PlayerDoc, PlayerModel } from '../models/player.js';
 import { parseMessage } from './parseMessage.js';
 import { sendMessage } from './sendMessage.js';
-import type { Scores } from '../domain/scores.js';
-import type { GameField } from '../domain/gameField.js';
+import type { Scores } from '../Domain/scores.js';
+import type { GameField } from '../Domain/gameField.js';
 
 export const handleMessage = async (req: Request, res: Response) => {
   const parsedMessage = parseMessage(req);
