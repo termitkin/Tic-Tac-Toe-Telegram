@@ -7,8 +7,10 @@
   "main": "app/index.ts",
   "scripts": {
     "build": "tsc",
+    "check": "yarn build && yarn test",
     "start": "node dist/index.js",
-    "dev": "tsc && node dist/index.js"
+    "dev": "tsc && node dist/index.js",
+    "test": "yarn build && node --test dist/config.test.js"
   },
   "type": "module",
   "keywords": [

@@ -24,9 +24,14 @@ Compile the application before committing:
 yarn build
 ```
 
-The compiled files are written to `dist/` and are not committed. The repository
-does not currently define an automated test script; do not describe a successful
-build as a test run.
+Run the automated tests or the complete validation command with:
+
+```bash
+yarn test
+yarn check
+```
+
+The compiled files are written to `dist/` and are not committed.
 
 ## Running the bot locally
 
@@ -43,10 +48,8 @@ equivalent two-step flow is `yarn build` followed by `yarn start`.
 
 A reachable MongoDB instance is also required. In managed development
 environments, use the supplied `MONGODB_URI` and do not start another database.
-Be aware that the current application does not read `MONGODB_URI`: it connects to
-`mongodb://mongodb:27017/tic-tac-toe`. Local execution therefore requires that
-the host name `mongodb` resolve to the supplied database, or a separate code
-change that makes the connection configurable.
+The application reads this variable and falls back to
+`mongodb://mongodb:27017/tic-tac-toe` for the existing container deployment.
 
 `TELEGRAM_BOT_CHAT_ID` appears in the deployment example but is not read by the
 current application. Telegram sends the chat ID in each webhook request. To

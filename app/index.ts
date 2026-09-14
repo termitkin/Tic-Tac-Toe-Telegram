@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { handleMessage } from './Application/messageController.js';
+import { resolveMongoDbUri } from './config.js';
 
 const APP_PORT = 7000;
 
@@ -8,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 mongoose
-  .connect('mongodb://mongodb:27017/tic-tac-toe')
+  .connect(resolveMongoDbUri(process.env.MONGODB_URI))
   .catch((error) => console.log('CONNECTION NOT OPENED BECAUSE:\n', error));
 
 mongoose.connection.on('error', (error) => console.log('SOME DB ERROR:\n', error));

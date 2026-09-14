@@ -30,3 +30,18 @@ case-sensitive filesystem.
 
 - **WHEN** a contributor runs `yarn build` after installing dependencies
 - **THEN** TypeScript resolves the `Application` and `Domain` imports using their on-disk casing
+
+### Requirement: Local MongoDB configuration
+
+The application SHALL use `MONGODB_URI` when it is set and SHALL retain the
+existing container connection URI as a fallback.
+
+#### Scenario: A managed development database is supplied
+
+- **WHEN** a contributor starts the application with `MONGODB_URI` set
+- **THEN** Mongoose connects using that supplied connection string
+
+#### Scenario: The container deployment starts without an override
+
+- **WHEN** the application starts without `MONGODB_URI`
+- **THEN** Mongoose connects to `mongodb://mongodb:27017/tic-tac-toe`

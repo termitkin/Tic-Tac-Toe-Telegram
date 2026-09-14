@@ -12,10 +12,12 @@ The repository has no `CLAUDE.md`. Contributors must infer the TypeScript/Yarn w
 - Define repository conventions for task branches and concise, imperative commits.
 - Correct import path casing so the documented TypeScript build works on
   case-sensitive filesystems.
+- Read the local MongoDB connection from `MONGODB_URI`, retaining the existing
+  container URI as a fallback, and cover the selection logic with tests.
 
 ## Impact
 
-- Affected files: new `CLAUDE.md` at the repository root and import declarations
-  under `app/`.
+- Affected files: new `CLAUDE.md` at the repository root, `package.json`, MongoDB
+  startup configuration, its tests, and import declarations under `app/`.
 - Affected capability: developer documentation and local build validation.
 - No runtime behavior, API, database schema, or user-facing game flow changes.
